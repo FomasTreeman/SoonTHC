@@ -1,7 +1,8 @@
 <script>
   import Item from "./Item.svelte";
+  import countStore from "../../store";
 
-  let subtotal = 0;
+  let subtotal;
   let products = [
     {
       product: "Waxed Cotton Hooded Jacket",
@@ -36,8 +37,29 @@
     subtotal = products.reduce((acc, curr) => {
       return acc + curr.total();
     }, 0);
+    // console.log(subtotal);
   }
+
+  function getSubtotal() {
+    return products.reduce((acc, curr) => {
+      return acc + curr.total();
+    }, 0);
+  }
+
   setSubtotal();
+
+  function getBasketCount() {
+    const count = products.reduce((acc, curr) => acc + curr.quantity, 0);
+    console.log(count);
+    return count;
+  }
+
+  $: {
+    countStore.set(products.reduce((acc, curr) => acc + curr.quantity, 0));
+    subtotal = products.reduce((acc, curr) => {
+      return acc + curr.total();
+    }, 0);
+  }
 </script>
 
 <div class="page">
@@ -48,7 +70,7 @@
     <p class="opacity">TOTAL</p>
   </nav>
   {#each products as product}
-    <Item {product} {setSubtotal} />
+    <Item bind:product />
   {/each}
   <hr class="opacity" />
 

@@ -1,16 +1,9 @@
 <script>
+  import QuantityInput from "../lib/QuantityInput.svelte";
   import countStore from "../store";
 
   let stock = 10;
   let quantity = 1;
-
-  function addQuantity() {
-    quantity === stock ? false : (quantity += 1);
-  }
-
-  function minusQuantity() {
-    quantity != 1 ? (quantity -= 1) : false;
-  }
 
   function setBasketCount() {
     countStore.update((x) => x + quantity);
@@ -34,23 +27,7 @@
   </article>
 
   <p class="opacity stock">{stock} IN STOCK</p>
-  <section class="flex" style="width: 7rem;">
-    <button
-      type="button"
-      class="button__icon state-link__icon"
-      on:click={minusQuantity}
-    >
-      -
-    </button>
-    <p>{quantity}</p>
-    <button
-      type="button"
-      class="button__icon state-link__icon"
-      on:click={addQuantity}
-    >
-      +
-    </button>
-  </section>
+  <QuantityInput maxQuantity={10} bind:quantity />
   <button
     type="button"
     class="button__text state-link__text"
@@ -97,20 +74,6 @@
   .column {
     flex-direction: column;
     align-items: start;
-  }
-
-  .button__icon {
-    border-radius: 24px;
-    font-size: medium;
-    font-weight: 300;
-    width: 2rem;
-    height: 2rem;
-  }
-
-  .state-link__icon {
-    background-color: transparent;
-    color: #3f51b5;
-    border: 1px solid #3f51b5;
   }
 
   .button__text {

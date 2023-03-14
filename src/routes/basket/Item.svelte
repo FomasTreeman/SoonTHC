@@ -1,19 +1,6 @@
 <script>
-  import countStore from "../../store";
+  import QuantityInput from "../../lib/QuantityInput.svelte";
   export let product;
-  export let setSubtotal;
-
-  function addQuantity() {
-    product.quantity === 10 ? false : (product.quantity += 1);
-    countStore.update((count) => count + 1);
-    setSubtotal();
-  }
-
-  function minusQuantity() {
-    product.quantity != 1 ? (product.quantity -= 1) : false;
-    countStore.update((count) => count - 1);
-    setSubtotal();
-  }
 </script>
 
 <main class="flex">
@@ -21,23 +8,9 @@
   <a href="/">
     <img src={product.img} alt="red jacket" />
   </a>
-  <section>
-    <p>£{product.price}</p>
-  </section>
-  <section>
-    <div class="flex flex__align-center" style="width: 7rem;">
-      <button class="button__icon state-link__icon" on:click={minusQuantity}>
-        -
-      </button>
-      <p>{product.quantity}</p>
-      <button class="button__icon state-link__icon" on:click={addQuantity}>
-        +
-      </button>
-    </div>
-  </section>
-  <section>
-    <p>£{product.total()}</p>
-  </section>
+  <p>£{product.price}</p>
+  <QuantityInput maxQuantity={10} bind:quantity={product.quantity} />
+  <p>£{product.total()}</p>
 </main>
 
 <!-- <hr class="opacity" /> -->
@@ -50,7 +23,6 @@
     height: 7rem;
     max-width: 9rem;
     margin: 1rem;
-    /* margin-right: auto; */
   }
 
   main a {
@@ -63,10 +35,6 @@
     align-items: start;
     justify-content: end;
   }
-  /* 
-  .space-between {
-    justify-content: space-between;
-  } */
 
   main.flex {
     gap: 4rem;
@@ -83,28 +51,5 @@
 
   main.flex > :last-child {
     width: 10rem;
-  }
-
-  .flex__align-center {
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .opacity {
-    font-size: x-small;
-  }
-
-  .button__icon {
-    border-radius: 24px;
-    font-size: medium;
-    font-weight: 300;
-    width: 2rem;
-    height: 2rem;
-  }
-
-  .state-link__icon {
-    background-color: transparent;
-    color: #3f51b5;
-    border: 1px solid #3f51b5;
   }
 </style>
