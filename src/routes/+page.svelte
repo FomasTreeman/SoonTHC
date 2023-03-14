@@ -1,6 +1,7 @@
 <script>
   let stock = 10;
   let quantity = 1;
+  let basketCount = 0;
 
   function addQuantity() {
     quantity === stock ? false : (quantity += 1);
@@ -9,8 +10,19 @@
   function minusQuantity() {
     quantity != 1 ? (quantity -= 1) : false;
   }
+
+  function setBasketCount() {
+    basketCount += quantity;
+  }
 </script>
 
+<button
+  class="button__icon--count {basketCount > 0
+    ? 'state-link__text'
+    : 'state-disabled'}"
+>
+  {basketCount}
+</button>
 <img class="item" src="clothing.png" alt="item of clothing" />
 <section class="flex column">
   <article class="description">
@@ -37,7 +49,11 @@
       +
     </button>
   </section>
-  <button class="button__text state-link__text" style="margin-block: 2rem">
+  <button
+    class="button__text state-link__text"
+    style="margin-block: 2rem"
+    on:click={setBasketCount}
+  >
     ADD TO BASKET
   </button>
 </section>
@@ -88,6 +104,23 @@
     height: 2rem;
   }
 
+  .button__icon--count {
+    border-radius: 24px;
+    font-size: small;
+    width: 2rem;
+    height: 2rem;
+    color: beige;
+    scale: 0.8;
+
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+  }
+
+  .state-disabled {
+    border: none;
+    background: rgba(0, 0, 0, 0.25);
+  }
   .state-link__icon {
     background-color: transparent;
     color: #3f51b5;

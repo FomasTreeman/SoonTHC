@@ -1,13 +1,17 @@
 <header>
   <div>
     <h2 class="title opacity">SOON_</h2>
-    <h2 class="page">Basket App</h2>
+    <h2>Basket App</h2>
   </div>
   <div>
-    <a href="/">
-      <img class="basket" src="shopping-basket.png" alt="basket" />
+    <a href="/basket">
+      <img
+        class="basket"
+        style="margin-right: 3rem"
+        src="shopping-basket.png"
+        alt="basket"
+      />
     </a>
-    <button class="button__icon state-disabled"> 0 </button>
   </div>
 </header>
 <hr class="opacity" />
@@ -20,6 +24,10 @@
     font-style: normal;
     font-weight: 300;
     line-height: 28px;
+  }
+
+  :global(.page) {
+    margin: 2.5rem;
   }
 
   .title {
@@ -52,19 +60,5 @@
     margin-right: 0.5rem;
     width: 1.5rem;
     height: 1.5rem;
-  }
-
-  .button__icon {
-    border-radius: 24px;
-    font-size: small;
-    width: 2rem;
-    height: 2rem;
-    color: beige;
-    scale: 0.8;
-  }
-
-  .state-disabled {
-    border: none;
-    background: rgba(0, 0, 0, 0.25);
   }
 </style>
