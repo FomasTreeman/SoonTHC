@@ -1,67 +1,57 @@
 <script>
-  //   let products = {
-  //     product: "Waxed Cotton Hooded Jacket",
-  //     img: "clothing.png",
-  //     price: 650,
-  //     quantity: 3,
-  //   };
-  let price = [650.0];
-  let quantity = [1];
-  let total = [650.0];
-  let subtotal = 650;
+  import Item from "./Item.svelte";
 
-  function addQuantity() {
-    quantity[0] === 10 ? false : (quantity[0] += 1);
-    setTotal();
-    setSubtotal();
-  }
-
-  function minusQuantity() {
-    quantity[0] != 1 ? (quantity[0] -= 1) : false;
-    setTotal();
-    setSubtotal();
-  }
-
-  function setTotal() {
-    total[0] = quantity[0] * price[0];
-  }
+  let subtotal = 0;
+  let products = [
+    {
+      product: "Waxed Cotton Hooded Jacket",
+      img: "clothing.png",
+      price: 650,
+      quantity: 3,
+      total: function () {
+        return this.price * this.quantity;
+      },
+    },
+    {
+      product: "Another Amazing Jacket",
+      img: "another.png",
+      price: 1000,
+      quantity: 9,
+      total: function () {
+        return this.price * this.quantity;
+      },
+    },
+    {
+      product: "Jacket",
+      img: "top.png",
+      price: 60,
+      quantity: 2,
+      total: function () {
+        return this.price * this.quantity;
+      },
+    },
+  ];
 
   function setSubtotal() {
-    subtotal = total.reduce((acc, curr) => acc + curr);
+    subtotal = products.reduce((acc, curr) => {
+      return acc + curr.total();
+    }, 0);
   }
+  setSubtotal();
 </script>
 
 <div class="page">
-  <main class="flex">
-    <section>
-      <p class="opacity">PRODUCT</p>
-      <div class="flex ">
-        <a href="/">Waxed Cotton Hooded Jacket</a>
-        <img src="clothing.png" alt="red jacket" />
-      </div>
-    </section>
-    <section>
-      <p class="opacity">PRICE</p>
-      <p>£650</p>
-    </section>
-    <section>
-      <p class="opacity">QUANTITY</p>
-      <section class="flex flex__align-center" style="width: 7rem;">
-        <button class="button__icon state-link__icon" on:click={minusQuantity}>
-          -
-        </button>
-        <p>{quantity}</p>
-        <button class="button__icon state-link__icon" on:click={addQuantity}>
-          +
-        </button>
-      </section>
-    </section>
-    <section>
-      <p class="opacity">TOTAL</p>
-      <p>£{total}</p>
-    </section>
-  </main>
+  <nav class="flex">
+    <p class="opacity">PRODUCT</p>
+    <p class="opacity">PRICE</p>
+    <p class="opacity">QUANTITY</p>
+    <p class="opacity">TOTAL</p>
+  </nav>
+  {#each products as product}
+    <Item {product} {setSubtotal} />
+  {/each}
   <hr class="opacity" />
+
   <article class="checkout">
     <h3 class="opacity" style="margin: 0px">SUBTOTAL</h3>
     <p>£{subtotal}</p>
@@ -72,16 +62,24 @@
 </div>
 
 <style>
-  main img {
-    width: 8rem;
-    margin: 1rem 1rem 1rem 4rem;
-    /* margin-left: 4rem; */
-    /* margin-right: 1rem; */
+  nav.flex {
+    gap: 4rem;
   }
 
-  main :first-child a {
-    text-decoration: none;
-    color: inherit;
+  nav.flex > :first-child {
+    margin-right: auto;
+  }
+
+  nav.flex > :nth-child(2) {
+    width: 3rem;
+  }
+
+  nav.flex > :nth-child(3) {
+    width: 7rem;
+  }
+
+  nav.flex > :last-child {
+    width: 10rem;
   }
 
   hr {
@@ -91,23 +89,6 @@
   .flex {
     display: flex;
     align-items: start;
-  }
-
-  main.flex {
-    gap: 4rem;
-  }
-
-  main.flex > :nth-child(2) {
-    margin-left: auto;
-  }
-
-  main.flex > :last-child {
-    width: 10rem;
-  }
-
-  .flex__align-center {
-    align-items: center;
-    justify-content: space-between;
   }
 
   .opacity {
@@ -121,20 +102,6 @@
   .checkout {
     float: right;
     margin-top: 3rem;
-  }
-
-  .button__icon {
-    border-radius: 24px;
-    font-size: medium;
-    font-weight: 300;
-    width: 2rem;
-    height: 2rem;
-  }
-
-  .state-link__icon {
-    background-color: transparent;
-    color: #3f51b5;
-    border: 1px solid #3f51b5;
   }
 
   .button__text {
