@@ -1,16 +1,17 @@
 <script>
+  import countStore from "../../store";
   export let product;
   export let setSubtotal;
 
   function addQuantity() {
     product.quantity === 10 ? false : (product.quantity += 1);
-    // setTotal(index);
+    countStore.update((count) => count + 1);
     setSubtotal();
   }
 
   function minusQuantity() {
     product.quantity != 1 ? (product.quantity -= 1) : false;
-    // setTotal();
+    countStore.update((count) => count - 1);
     setSubtotal();
   }
 </script>

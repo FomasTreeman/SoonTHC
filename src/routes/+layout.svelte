@@ -1,9 +1,14 @@
+<script>
+  import Item from "./basket/Item.svelte";
+  import countStore from "../store";
+</script>
+
 <header>
   <div>
-    <h2 class="title opacity">SOON_</h2>
-    <h2>Basket App</h2>
+    <h1 class="title opacity">SOON_</h1>
+    <h1>Basket App</h1>
   </div>
-  <div>
+  <aside>
     <a href="/basket">
       <img
         class="basket"
@@ -12,7 +17,14 @@
         alt="basket"
       />
     </a>
-  </div>
+    <span
+      class="button__icon--count {$countStore > 0
+        ? 'state-link__text'
+        : 'state-disabled'}"
+    >
+      {$countStore}
+    </span>
+  </aside>
 </header>
 <hr class="opacity" />
 
@@ -60,5 +72,23 @@
     margin-right: 0.5rem;
     width: 1.5rem;
     height: 1.5rem;
+  }
+
+  .button__icon--count {
+    border-radius: 24px;
+    font-size: small;
+    width: 2rem;
+    height: 2rem;
+    color: inherit;
+    scale: 0.8;
+
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+  }
+
+  .state-disabled {
+    border: none;
+    background: rgba(0, 0, 0, 0.25);
   }
 </style>

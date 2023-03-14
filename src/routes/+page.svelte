@@ -1,7 +1,8 @@
 <script>
+  import countStore from "../store";
+
   let stock = 10;
   let quantity = 1;
-  let basketCount = 0;
 
   function addQuantity() {
     quantity === stock ? false : (quantity += 1);
@@ -12,21 +13,14 @@
   }
 
   function setBasketCount() {
-    basketCount += quantity;
+    countStore.update((x) => x + quantity);
   }
 </script>
 
-<button
-  class="button__icon--count {basketCount > 0
-    ? 'state-link__text'
-    : 'state-disabled'}"
->
-  {basketCount}
-</button>
 <img class="item" src="clothing.png" alt="item of clothing" />
 <section class="flex column">
   <article class="description">
-    <h3 class="product">Waxed Cotton Hooded Jacket</h3>
+    <h2 class="product">Waxed Cotton Hooded Jacket</h2>
     <p>
       The Drumming jacket in orange is finished with a water-repellent dry wax
       treatment that creates a love-worn look. It's made in the United Kingdom
@@ -41,15 +35,24 @@
 
   <p class="opacity stock">{stock} IN STOCK</p>
   <section class="flex" style="width: 7rem;">
-    <button class="button__icon state-link__icon" on:click={minusQuantity}>
+    <button
+      type="button"
+      class="button__icon state-link__icon"
+      on:click={minusQuantity}
+    >
       -
     </button>
     <p>{quantity}</p>
-    <button class="button__icon state-link__icon" on:click={addQuantity}>
+    <button
+      type="button"
+      class="button__icon state-link__icon"
+      on:click={addQuantity}
+    >
       +
     </button>
   </section>
   <button
+    type="button"
     class="button__text state-link__text"
     style="margin-block: 2rem"
     on:click={setBasketCount}
@@ -104,23 +107,6 @@
     height: 2rem;
   }
 
-  .button__icon--count {
-    border-radius: 24px;
-    font-size: small;
-    width: 2rem;
-    height: 2rem;
-    color: beige;
-    scale: 0.8;
-
-    position: absolute;
-    top: 3rem;
-    right: 3rem;
-  }
-
-  .state-disabled {
-    border: none;
-    background: rgba(0, 0, 0, 0.25);
-  }
   .state-link__icon {
     background-color: transparent;
     color: #3f51b5;
