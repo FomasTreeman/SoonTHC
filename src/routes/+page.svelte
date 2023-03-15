@@ -1,32 +1,19 @@
 <script>
+  import QuantityInput from "../lib/QuantityInput.svelte";
+  import countStore from "../store";
+
   let stock = 10;
   let quantity = 1;
-  let basketCount = 0;
-
-  function addQuantity() {
-    quantity === stock ? false : (quantity += 1);
-  }
-
-  function minusQuantity() {
-    quantity != 1 ? (quantity -= 1) : false;
-  }
 
   function setBasketCount() {
-    basketCount += quantity;
+    countStore.update((x) => x + quantity);
   }
 </script>
 
-<button
-  class="button__icon--count {basketCount > 0
-    ? 'state-link__text'
-    : 'state-disabled'}"
->
-  {basketCount}
-</button>
-<img class="item" src="clothing.png" alt="item of clothing" />
-<section class="flex column">
-  <article class="description">
-    <h3 class="product">Waxed Cotton Hooded Jacket</h3>
+<img src="clothing.png" alt="item of clothing" />
+<section>
+  <article>
+    <h2 class="product">Waxed Cotton Hooded Jacket</h2>
     <p>
       The Drumming jacket in orange is finished with a water-repellent dry wax
       treatment that creates a love-worn look. It's made in the United Kingdom
@@ -40,35 +27,42 @@
   </article>
 
   <p class="opacity stock">{stock} IN STOCK</p>
-  <section class="flex" style="width: 7rem;">
-    <button class="button__icon state-link__icon" on:click={minusQuantity}>
-      -
-    </button>
-    <p>{quantity}</p>
-    <button class="button__icon state-link__icon" on:click={addQuantity}>
-      +
-    </button>
-  </section>
-  <button
-    class="button__text state-link__text"
-    style="margin-block: 2rem"
-    on:click={setBasketCount}
-  >
-    ADD TO BASKET
-  </button>
+  <QuantityInput maxQuantity={10} bind:quantity />
+  <button type="button" on:click={setBasketCount}> ADD TO BASKET </button>
 </section>
 
 <style>
-  .item {
+  img {
     max-width: 40%;
     margin: 5%;
     float: left;
   }
 
-  .description {
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+  article {
     max-width: 25rem;
     float: right;
     margin-bottom: 2rem;
+  }
+
+  button {
+    padding: 10px 16px;
+    margin-block: 2rem;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.75px;
+    background: #3f51b5;
+    color: beige;
+    border: none;
+    border-radius: 48px;
+    text-transform: uppercase;
   }
 
   .product {
@@ -83,62 +77,5 @@
   .stock {
     margin-block: 0rem;
     font-size: x-small;
-  }
-
-  .flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .column {
-    flex-direction: column;
-    align-items: start;
-  }
-
-  .button__icon {
-    border-radius: 24px;
-    font-size: medium;
-    font-weight: 300;
-    width: 2rem;
-    height: 2rem;
-  }
-
-  .button__icon--count {
-    border-radius: 24px;
-    font-size: small;
-    width: 2rem;
-    height: 2rem;
-    color: beige;
-    scale: 0.8;
-
-    position: absolute;
-    top: 3rem;
-    right: 3rem;
-  }
-
-  .state-disabled {
-    border: none;
-    background: rgba(0, 0, 0, 0.25);
-  }
-  .state-link__icon {
-    background-color: transparent;
-    color: #3f51b5;
-    border: 1px solid #3f51b5;
-  }
-
-  .button__text {
-    padding: 10px 16px;
-    font-weight: 400;
-    font-size: 14px;
-    letter-spacing: 0.75px;
-    text-transform: uppercase;
-    border-radius: 48px;
-  }
-
-  .state-link__text {
-    background: #3f51b5;
-    color: beige;
-    border: none;
   }
 </style>
