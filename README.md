@@ -9,3 +9,5 @@ Svelte-kit (vite)
 
 # Note
 This was a take home challenge from SOON_, I decided to go further than the requirements hoping I wouldnt be punished for disobedience since the instructions did clearly say only one user journey. But have been enjoying learning svelte. :)
+
+Dark Reader chrome extension makes things look niccce :)
