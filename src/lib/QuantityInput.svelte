@@ -11,47 +11,36 @@
   }
 </script>
 
-<section class="flex flex__align-center" style="width: 7rem;">
-  <button
-    type="button"
-    class="button__icon state-link__icon"
-    on:click={minusQuantity}
-  >
-    -
-  </button>
+<section class="flex align-center">
+  <button type="button" on:click={minusQuantity}> - </button>
   <p>{quantity}</p>
-  <button
-    type="button"
-    class="button__icon state-link__icon"
-    on:click={addQuantity}
-  >
-    +
-  </button>
+  <button type="button" on:click={addQuantity}> + </button>
 </section>
 
 <style>
+  section {
+    width: 7rem;
+  }
+
   .flex {
     display: flex;
     align-items: start;
     justify-content: end;
   }
 
-  .flex__align-center {
+  .align-center {
     align-items: center;
     justify-content: space-between;
   }
 
-  .button__icon {
-    border-radius: 24px;
+  button {
     font-size: medium;
     font-weight: 300;
     width: 2rem;
     height: 2rem;
-  }
-
-  .state-link__icon {
     background-color: transparent;
     color: #3f51b5;
     border: 1px solid #3f51b5;
+    border-radius: 24px;
   }
 </style>

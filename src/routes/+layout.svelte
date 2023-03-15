@@ -1,5 +1,4 @@
 <script>
-  import Item from "./basket/Item.svelte";
   import countStore from "../store";
 </script>
 
@@ -7,13 +6,9 @@
   <h1 class="title opacity">SOON_</h1>
   <h1>Basket App</h1>
   <a href="/basket">
-    <img class="basket" src="shopping-basket.png" alt="basket" />
+    <img src="shopping-basket.png" alt="basket" />
   </a>
-  <p
-    class="button__icon--count {$countStore > 0
-      ? 'state-link__text'
-      : 'state-disabled'}"
-  >
+  <p class="button_icon {$countStore > 0 ? 'state-full' : 'state-empty'}">
     {$countStore}
   </p>
 </header>
@@ -54,15 +49,21 @@
 
   a,
   p {
+    margin-inline: 0.5rem;
     display: inline-block;
     line-height: 0px;
-    margin-inline: 0.5rem;
   }
 
-  header > :last-child {
+  p {
     margin-block: auto;
     text-align: center;
     line-height: 32px;
+  }
+
+  img {
+    margin-right: 0.5rem;
+    width: 1.5rem;
+    height: 1.5rem;
   }
 
   hr {
@@ -70,13 +71,7 @@
     margin-top: 0%;
   }
 
-  .basket {
-    margin-right: 0.5rem;
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
-  .button__icon--count {
+  .button_icon {
     border-radius: 24px;
     font-size: small;
     width: 2rem;
@@ -85,13 +80,13 @@
     scale: 0.8;
   }
 
-  .state-link__text {
+  .state-full {
     background: #3f51b5;
     color: beige;
     border: none;
   }
 
-  .state-disabled {
+  .state-empty {
     border: none;
     background: rgba(0, 0, 0, 0.25);
   }

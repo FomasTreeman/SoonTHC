@@ -10,9 +10,9 @@
   }
 </script>
 
-<img class="item" src="clothing.png" alt="item of clothing" />
-<section class="flex column">
-  <article class="description">
+<img src="clothing.png" alt="item of clothing" />
+<section>
+  <article>
     <h2 class="product">Waxed Cotton Hooded Jacket</h2>
     <p>
       The Drumming jacket in orange is finished with a water-repellent dry wax
@@ -28,27 +28,41 @@
 
   <p class="opacity stock">{stock} IN STOCK</p>
   <QuantityInput maxQuantity={10} bind:quantity />
-  <button
-    type="button"
-    class="button__text state-link__text"
-    style="margin-block: 2rem"
-    on:click={setBasketCount}
-  >
-    ADD TO BASKET
-  </button>
+  <button type="button" on:click={setBasketCount}> ADD TO BASKET </button>
 </section>
 
 <style>
-  .item {
+  img {
     max-width: 40%;
     margin: 5%;
     float: left;
   }
 
-  .description {
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    align-items: start;
+  }
+
+  article {
     max-width: 25rem;
     float: right;
     margin-bottom: 2rem;
+  }
+
+  button {
+    padding: 10px 16px;
+    margin-block: 2rem;
+    font-weight: 400;
+    font-size: 14px;
+    letter-spacing: 0.75px;
+    background: #3f51b5;
+    color: beige;
+    border: none;
+    border-radius: 48px;
+    text-transform: uppercase;
   }
 
   .product {
@@ -63,31 +77,5 @@
   .stock {
     margin-block: 0rem;
     font-size: x-small;
-  }
-
-  .flex {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .column {
-    flex-direction: column;
-    align-items: start;
-  }
-
-  .button__text {
-    padding: 10px 16px;
-    font-weight: 400;
-    font-size: 14px;
-    letter-spacing: 0.75px;
-    text-transform: uppercase;
-    border-radius: 48px;
-  }
-
-  .state-link__text {
-    background: #3f51b5;
-    color: beige;
-    border: none;
   }
 </style>

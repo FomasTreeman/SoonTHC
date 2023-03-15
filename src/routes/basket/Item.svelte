@@ -3,29 +3,30 @@
   export let product;
 </script>
 
-<main class="flex">
+<section class="flex">
   <a href="/">{product.product}</a>
   <a href="/">
     <img src={product.img} alt="red jacket" />
   </a>
   <p>£{product.price}</p>
   <QuantityInput maxQuantity={10} bind:quantity={product.quantity} />
-  <p>£{product.total()}</p>
-</main>
+  <p>£{product.price * product.quantity}</p>
+</section>
 
 <!-- <hr class="opacity" /> -->
 <style>
-  main {
+  section {
     margin-block: 2rem;
   }
 
-  main img {
+  img {
     height: 7rem;
     max-width: 9rem;
     margin: 1rem;
   }
 
-  main a {
+  /* accesibilty note - not obvious its a link */
+  a {
     text-decoration: none;
     color: inherit;
   }
@@ -36,20 +37,20 @@
     justify-content: end;
   }
 
-  main.flex {
+  .flex {
     gap: 4rem;
   }
 
-  main.flex > :first-child {
+  .flex > :first-child {
     margin-right: auto;
   }
 
-  main.flex > :nth-last-child(3) {
+  .flex > :nth-last-child(3) {
     width: 3rem;
     text-align: start;
   }
 
-  main.flex > :last-child {
+  .flex > :last-child {
     width: 10rem;
   }
 </style>
