@@ -1,6 +1,6 @@
 # Deploy
 
-To see this product go [here](https://vercel.com/new/success?developer-id=&external-id=&redirect-url=&branch=main&deploymentUrl=soon-2rcs3sxs1-fomastreeman.vercel.app&projectName=soon-thc&s=https%3A%2F%2Fgithub.com%2FFomasTreeman%2FSoonTHC&gitOrgLimit=&hasTrialAvailable=1&totalProjects=1)
+To see this product go [here](https://soon-thc.vercel.app/)
 
 # Tools
 <img src="https://github.com/devicons/devicon/blob/master/icons/svelte/svelte-original.svg" title="Javascript" alt="js" width="40" height="40"/>&nbsp;
